@@ -6,7 +6,6 @@ import time
 import torch
 import torch.optim as optim
 
-
 import numpy as np
 
 from nets.critic_network import CriticNetwork
@@ -15,6 +14,7 @@ from train import train_epoch, validate, get_inner_model
 from nets.attention_model import AttentionModel
 from nets.pointer_network import PointerNetwork, CriticNetworkLSTM
 from utils import torch_load_cpu, load_problem
+from show import show_speed_performance_dataset
 
 
 def run(opts):
@@ -25,9 +25,6 @@ def run(opts):
     # Set the random seed
     torch.manual_seed(opts.seed)
 
-    # Set the device
-    opts.device = torch.device("cuda:0" if opts.use_cuda else "cpu")
-
     # Figure out what's the problem
     problem =load_problem(opts.problem)
 
@@ -37,10 +34,12 @@ def run(opts):
     time_list = []
 
     val_dataset = problem.load_val_dataset(
-            size=opts.val_graph_size, num_samples=opts.val_size, filename=opts.val_dataset, distribution=opts.data_distribution)
+            size=opts.graph_size, num_samples=opts.val_size, filename=opts.val_dataset, distribution=opts.data_distribution)
     opts.eval_batch_size = 1
     time_start = time.time()
-    validate(model, val_dataset, opts)
+
+    show_speed_performance_dataset(val_dataset)
+
     time_end = time.time()
     time_list.append(time_end-time_start)
     print('time_cost:',time_end-time_start)

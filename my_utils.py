@@ -13,7 +13,6 @@ def seed_everything(seed=3258):
 
 
 def set_users_g(users, tg_list):
-    # print(len(users),len(tg_list))
     assert len(users) == len(tg_list), '信道信息数量与用户数不匹配'
     for user, tg in zip(users, tg_list):
         user.g = tg
