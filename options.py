@@ -13,12 +13,12 @@ def get_options(args=None):
     # parser.add_argument('--problem', default='noop', help="The problem to solve, default 'tsp'")
     parser.add_argument('--problem', default='noop', help="The problem to solve, default 'tsp'")
     parser.add_argument('--graph_size', type=int, default=10, help="The size of the problem graph")
-    parser.add_argument('--val_graph_size', type=int, default=10, help="The size of the problem graph")
+    parser.add_argument('--val_graph_size', type=int, default=8, help="The size of the problem graph for validating")
     parser.add_argument('--batch_size', type=int, default=64, help='Number of instances per batch during training, default 64')
     # parser.add_argument('--epoch_size', type=int, default=1280, help='Number of instances per epoch during training')
     parser.add_argument('--epoch_size', type=int, default=1280, help='Number of instances per epoch during training')
     parser.add_argument('--val_size', type=int, default=1000,
-                        help='Number of instances used for reporting validation performance')       # 默认验证集大小只有100
+                        help='Number of instances used for reporting validation performance')
     parser.add_argument('--val_dataset', type=str, default=None, help='Dataset file to use for validation')
 
     # Model
